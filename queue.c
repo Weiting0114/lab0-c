@@ -125,9 +125,23 @@ bool q_insert_tail(queue_t *q, char *s)
  */
 bool q_remove_head(queue_t *q, char *sp, size_t bufsize)
 {
-    /* TODO: You need to fix up this code. */
-    /* TODO: Remove the above comment when you are about to implement. */
+    if (q == NULL || q->head == NULL)
+        return false;
+
+    list_ele_t *rm_node = q->head;
+    if (sp) {
+        strncpy(sp, rm_node->value, bufsize - 1);
+    }
+
+    /*
+     *Method as same as free function
+     *Free node's value and then free value
+     */
     q->head = q->head->next;
+    q->size -= 1;
+    free(rm_node->value);
+    free(rm_node);
+
     return true;
 }
 
