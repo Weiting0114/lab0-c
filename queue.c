@@ -125,11 +125,12 @@ bool q_insert_tail(queue_t *q, char *s)
  */
 bool q_remove_head(queue_t *q, char *sp, size_t bufsize)
 {
-    if (q == NULL || q->head == NULL)
+    if (q == NULL || q->head == NULL || q->size == 0)
         return false;
 
     list_ele_t *rm_node = q->head;
     if (sp) {
+        memset(sp, '\0', bufsize);
         strncpy(sp, rm_node->value, bufsize - 1);
     }
 
