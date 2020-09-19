@@ -166,10 +166,21 @@ int q_size(queue_t *q)
  */
 void q_reverse(queue_t *q)
 {
-    /* TODO: You need to write the code for this function */
-    /* TODO: Remove the above comment when you are about to implement. */
-}
+    if (q == NULL || q->size <= 1)
+        return;
 
+    list_ele_t *cur, *curnxt;
+    q->tail = q->head;
+    cur = q->head;
+    curnxt = q->head->next;
+    while (curnxt != NULL) {
+        q->head = curnxt;
+        curnxt = q->head->next;
+        q->head->next = cur;
+        cur = q->head;
+    }
+    q->tail->next = NULL;
+}
 /*
  * Sort elements of queue in ascending order
  * No effect if q is NULL or empty. In addition, if q has only one
